@@ -41,4 +41,6 @@ MaxEmptyLinesToKeep: 2
 NamespaceIndentation: All
 TabWidth: 4
 UseTab: Never
+AlignConsecutiveDeclarations: true
+PointerAlignment: Left
 ...

@@ -7,6 +7,7 @@
 #include "SBaseCharacter.generated.h"
 
 class UCameraComponent;
+class USpringArmComponent;
 
 UCLASS()
 class UE5SHOOTER_API ASBaseCharacter final : public ACharacter
@@ -19,18 +20,21 @@ public:
 
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-    UCameraComponent *CameraComponent;
+    USpringArmComponent* SpringArmComponent;
+
+    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
+    UCameraComponent* CameraComponent;
 
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
 
 public:
     // Called every frame
-    virtual void Tick(float DeltaTime) override;
+    virtual void Tick(const float DeltaTime) override;
 
     // Called to bind functionality to input
-    virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+    virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 private:
-    void MoveForward(float Amount);
-    void MoveRight(float Amount);
+    void MoveForward(const float Amount);
+    void MoveRight(const float Amount);
 };
