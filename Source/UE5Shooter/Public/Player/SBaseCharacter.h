@@ -9,7 +9,7 @@
 class UCameraComponent;
 
 UCLASS()
-class UE5SHOOTER_API ASBaseCharacter : public ACharacter
+class UE5SHOOTER_API ASBaseCharacter final : public ACharacter
 {
     GENERATED_BODY()
 
@@ -18,9 +18,8 @@ public:
     ASBaseCharacter();
 
 protected:
-
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
-    UCameraComponent* CameraComponent; 
+    UCameraComponent *CameraComponent;
 
     // Called when the game starts or when spawned
     virtual void BeginPlay() override;
@@ -31,4 +30,7 @@ public:
 
     // Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent *PlayerInputComponent) override;
+private:
+    void MoveForward(float Amount);
+    void MoveRight(float Amount);
 };
