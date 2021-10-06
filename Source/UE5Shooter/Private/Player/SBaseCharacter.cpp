@@ -2,6 +2,7 @@
 
 #include "Player/SBaseCharacter.h"
 #include "Camera/CameraComponent.h"
+#include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
 // Sets default values
@@ -40,14 +41,27 @@ void ASBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
     PlayerInputComponent->BindAxis("LookUp", this, &ASBaseCharacter::AddControllerPitchInput);
     PlayerInputComponent->BindAxis("TurnAround", this, &ASBaseCharacter::AddControllerYawInput);
     PlayerInputComponent->BindAction("Jump", IE_Pressed, this, &ASBaseCharacter::Jump);
+    PlayerInputComponent->BindAction("Run", IE_Pressed, this, &ASBaseCharacter::Run);
+    PlayerInputComponent->BindAction("Run", IE_Released, this, &ASBaseCharacter::EndRun);
 }
 
 void ASBaseCharacter::MoveForward(const float Amount)
 {
+    GetCharacterMovement()->MaxWalkSpeed = WantToRun && Amount > 0 ? RUN_SPEED : WALK_SPEED;
     AddMovementInput(GetActorForwardVector(), Amount);
 }
 
 void ASBaseCharacter::MoveRight(const float Amount)
 {
     AddMovementInput(GetActorRightVector(), Amount);
+}
+
+void ASBaseCharacter::Run()
+{
+    WantToRun = true;
+}
+
+void ASBaseCharacter::EndRun()
+{
+    WantToRun = false;
 }

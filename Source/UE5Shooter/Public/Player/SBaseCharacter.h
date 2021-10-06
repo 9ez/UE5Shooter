@@ -35,6 +35,11 @@ public:
     // Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 private:
+    const float WALK_SPEED = 600;
+    const float RUN_SPEED = 1200;
+    bool WantToRun = false;
     void MoveForward(const float Amount);
     void MoveRight(const float Amount);
+    void Run();
+    void EndRun();
 };
