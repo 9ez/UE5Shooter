@@ -25,21 +25,19 @@ protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
     UCameraComponent* CameraComponent;
 
-    // Called when the game starts or when spawned
-    virtual void BeginPlay() override;
-
 public:
-    // Called every frame
-    virtual void Tick(const float DeltaTime) override;
-
     // Called to bind functionality to input
     virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
+
+    UFUNCTION(BlueprintCallable, Category = "Movement")
+    float GetMovementDirection() const;
+
 private:
     const float WALK_SPEED = 600;
     const float RUN_SPEED = 1200;
-    bool WantToRun = false;
+    bool WantsToRun = false;
     void MoveForward(const float Amount);
-    void MoveRight(const float Amount);
-    void Run();
-    void EndRun();
+    void MoveRight(const float Amount) { AddMovementInput(GetActorRightVector(), Amount); }
+    void Run() { WantsToRun = true; }
+    void EndRun() { WantsToRun = false; }
 };

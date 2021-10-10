@@ -19,18 +19,6 @@ ASBaseCharacter::ASBaseCharacter()
     CameraComponent->SetupAttachment(SpringArmComponent);
 }
 
-// Called when the game starts or when spawned
-void ASBaseCharacter::BeginPlay()
-{
-    Super::BeginPlay();
-}
-
-// Called every frame
-void ASBaseCharacter::Tick(const float DeltaTime)
-{
-    Super::Tick(DeltaTime);
-}
-
 // Called to bind functionality to input
 void ASBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComponent)
 {
@@ -45,23 +33,19 @@ void ASBaseCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
     PlayerInputComponent->BindAction("Run", IE_Released, this, &ASBaseCharacter::EndRun);
 }
 
+float ASBaseCharacter::GetMovementDirection() const
+{
+    const FVector Velocity = GetVelocity();
+    if (Velocity.IsZero()) return 0.0f;
+    const FVector ForwardVector = GetActorForwardVector();
+    const FVector VelocityNormal = Velocity.GetSafeNormal();
+    const FVector CrossProduct = FVector::CrossProduct(ForwardVector, VelocityNormal);
+    return FMath::RadiansToDegrees(FMath::Acos(FVector::DotProduct(ForwardVector, VelocityNormal))) *
+        (CrossProduct.IsZero() ? 1 : FMath::Sign(CrossProduct.Z));
+}
+
 void ASBaseCharacter::MoveForward(const float Amount)
 {
-    GetCharacterMovement()->MaxWalkSpeed = WantToRun && Amount > 0 ? RUN_SPEED : WALK_SPEED;
+    GetCharacterMovement()->MaxWalkSpeed = WantsToRun && Amount > 0 ? RUN_SPEED : WALK_SPEED;
     AddMovementInput(GetActorForwardVector(), Amount);
-}
-
-void ASBaseCharacter::MoveRight(const float Amount)
-{
-    AddMovementInput(GetActorRightVector(), Amount);
-}
-
-void ASBaseCharacter::Run()
-{
-    WantToRun = true;
-}
-
-void ASBaseCharacter::EndRun()
-{
-    WantToRun = false;
 }
