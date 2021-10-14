@@ -10,6 +10,6 @@ public class UE5ShooterTarget : TargetRules
 		Type = TargetType.Game;
 		DefaultBuildSettings = BuildSettingsVersion.V2;
 
-		ExtraModuleNames.AddRange( new string[] { "UE5Shooter" } );
+		ExtraModuleNames.AddRange(new string[] { "UE5Shooter" });
 	}
 }

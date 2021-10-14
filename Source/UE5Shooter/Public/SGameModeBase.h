@@ -6,9 +6,6 @@
 #include "GameFramework/GameModeBase.h"
 #include "SGameModeBase.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class UE5SHOOTER_API ASGameModeBase : public AGameModeBase
 {

@@ -6,9 +6,6 @@
 #include "GameFramework/PlayerController.h"
 #include "SPlayerController.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class UE5SHOOTER_API ASPlayerController : public APlayerController
 {
