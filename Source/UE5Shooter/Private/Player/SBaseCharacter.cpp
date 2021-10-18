@@ -7,6 +7,8 @@
 #include "GameFramework/CharacterMovementComponent.h"
 #include "GameFramework/SpringArmComponent.h"
 
+DEFINE_LOG_CATEGORY_STATIC(BaseCharacterLog, All, All);
+
 ASBaseCharacter::ASBaseCharacter()
 {
     PrimaryActorTick.bCanEverTick = true;
@@ -22,6 +24,11 @@ ASBaseCharacter::ASBaseCharacter()
 
     HealthTextComponent = CreateDefaultSubobject<UTextRenderComponent>("HealthTextComponent");
     HealthTextComponent->SetupAttachment(RootComponent);
+}
+
+void ASBaseCharacter::BeginPlay()
+{
+    Super::BeginPlay();
 }
 
 void ASBaseCharacter::Tick(const float DeltaTime)
@@ -49,7 +56,7 @@ float ASBaseCharacter::GetMovementDirection() const
     const FVector Velocity = GetVelocity();
     if (Velocity.IsZero())
     {
-        return 0.0f;
+        return 0;
     }
     const FVector ForwardVector = GetActorForwardVector();
     const FVector VelocityNormal = Velocity.GetSafeNormal();

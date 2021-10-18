@@ -18,10 +18,13 @@ public:
 
 protected:
     UPROPERTY(EditAnywhere, BlueprintReadWrite, Category = "Health", meta = (ClampMin =  "0", ClampMax = "1000.0"))
-    float MaxHealth = 100.0f;
+    float MaxHealth = 100;
 
     virtual void BeginPlay() override;
 
+    UFUNCTION()
+    void OnTakeAnyDamage(AActor* DamagedActor, float Damage, const UDamageType* DamageType, AController* InstigatedBy, AActor* DamageCauser);
+
 private:
-    float Health = 0.0f;
+    float Health = 0;
 };

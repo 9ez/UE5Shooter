@@ -18,6 +18,7 @@ class UE5SHOOTER_API ASBaseCharacter final : public ACharacter
 
 public:
     ASBaseCharacter();
+    virtual void BeginPlay() override;
 
 protected:
     UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = "Components")
