@@ -12,6 +12,5 @@
 UCLASS()
 class UE5SHOOTER_API USFireDamageType : public UDamageType
 {
-	GENERATED_BODY()
-	
+    GENERATED_BODY()
 };
