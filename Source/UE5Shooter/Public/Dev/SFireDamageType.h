@@ -6,9 +6,6 @@
 #include "GameFramework/DamageType.h"
 #include "SFireDamageType.generated.h"
 
-/**
- * 
- */
 UCLASS()
 class UE5SHOOTER_API USFireDamageType : public UDamageType
 {
